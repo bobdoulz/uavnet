@@ -1,0 +1,74 @@
+graph{
+    fill-color: white;
+}
+
+node.stat{
+    fill-color: white;
+    text-mode: normal;
+}
+node.corner{
+    fill-color: white;
+    size: 1px, 1px;
+}
+
+node.innercorner{
+    fill-color: white;
+    size: 2px, 2px;
+    z-index: 2;
+}
+edge.innerborder{
+   fill-color: white;
+    size: 2px, 2px;
+    z-index: 2;
+}
+
+edge.neighbor{
+   fill-color: blue;
+    size: 1px, 1px;
+    z-index: 4;
+}
+
+node.dest{
+    shape: cross;
+    fill-color: red;
+    stroke-color: red;
+    size: 0px, 0px;
+    z-index: 3;
+}
+
+node.base {
+    z-index: 4;
+    shape: cross;
+    size: 20px, 20px;
+}
+
+node.grid {
+    shape: box;
+    size-mode: dyn-size;
+    size: 3px, 3px;
+    fill-mode: dyn-plain;
+    fill-color: #EEE, black;
+    z-index: 2;
+}
+
+node.front {
+    size: 4px, 4px;
+    fill-mode: dyn-plain;
+    fill-color: orange, yellow;
+    z-index: 5;
+    shadow-mode: gradient-radial; 
+    shadow-width: 10px; 
+    shadow-color: #000,#EEF; 
+    shadow-offset: 0px;
+    text-color: white;
+}
+node.back {
+    size: 4px, 4px;
+    fill-color: orange;
+    z-index: 5;
+}
+edge.body {
+    fill-color: orange;
+    size: 4px, 4px;
+    z-index: 5;
+}
