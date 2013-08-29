@@ -13,6 +13,8 @@ import org.graphstream.stream.file.FileSinkImages.Quality;
 import org.graphstream.stream.file.FileSinkImages.RendererType;
 import org.graphstream.stream.file.FileSinkImages.Resolution;
 import org.graphstream.stream.file.FileSinkImages.Resolutions;
+import org.graphstream.ui.swingViewer.View;
+import org.graphstream.ui.swingViewer.Viewer;
 import org.uav.autopilot.AutopilotFixedWingOutOfSimulationAreaStrategy;
 import org.uav.autopilot.Destination;
 import org.uav.AbstractUAV;
@@ -148,6 +150,11 @@ public class Simulation {
 	    g.addAttribute("ui.quality");
 	    g.addAttribute("ui.antialias");
 	    g.display(false);
+	    Viewer v = g.display();
+	    View view = v.getDefaultView();
+	    view.resizeFrame(1280,720);
+	    //view.setViewCenter(440000, 2503000, 0);
+	    //view.setViewPercent(0.25);
 	    double minValue = 2.0;
 	    double maxValue = 4.0;
 	    Random rand = new Random(seed);
@@ -171,8 +178,8 @@ public class Simulation {
 	    fsi.setStyleSheet("url('style.css')");
 	    fsi.setQuality(Quality.HIGH);
 	    fsi.setRenderer(RendererType.SCALA);
-	    fsi.addLogo("/Users/bobdoulz/dev/coverage/src/banniere.png", 
-		    280, 620);
+	    /* fsi.addLogo("/Users/bobdoulz/dev/coverage/src/banniere.png", 
+		    280, 620);*/
 	    g.addSink(fsi);
 	    fsi.begin(prefix);
 	    return fsi;
@@ -213,7 +220,7 @@ public class Simulation {
 		(this.uavType == "UAVRandomMovement") ||
 		(this.uavType == "UAVRandomDestination") ||
 		(this.uavType == "UAVBasicPheromoneMovement") ||
-		(this.uavType == "UAVBasicPheromonewithrepulsion")){
+		(this.uavType == "UAVBasicPheromoneWithRepulsion")){
 	    aco = new CentralizedACO(this);
 	}
 
@@ -230,7 +237,7 @@ public class Simulation {
 		UAVBasicPheromoneMovement uav = (UAVBasicPheromoneMovement)u[i];
 		uav.setAco(aco);
 	    }
-	    if (this.uavType == "UAVBasicPheromonewithrepulsion"){
+	    if (this.uavType == "UAVBasicPheromoneWithRepulsion"){
 		UAVBasicPheromoneWithRepulsion uav = 
 			(UAVBasicPheromoneWithRepulsion)u[i];
 		uav.setAco(aco);
@@ -350,7 +357,7 @@ public class Simulation {
 		new Heading(getInitHeading(), getMaxHeadingChange()), 
 		new Speed(getInitSpeed(), getMinSpeed(), getMaxSpeed(), 
 			getMaxAccel(), getMaxDecel()), 
-		new TurnRate());
+			new TurnRate());
 	/** The autopilot */
 	double destX, destY;
 	destX = getRand().nextDouble()*getMaxX();
@@ -366,7 +373,7 @@ public class Simulation {
 	/** The actual UAV instance creation */
 	if (this.uavType == "UAVBasicPheromoneMovement")
 	    u[id] = new UAVBasicPheromoneMovement(auto, id, this.aco);
-	if (this.uavType == "UAVBasicPheromonewithrepulsion")
+	if (this.uavType == "UAVBasicPheromoneWithRepulsion")
 	    u[id] = new UAVBasicPheromoneWithRepulsion(auto, id, 
 		    this.uavGraph, this.aco);
 	/** To activate when the related classes are finished 
