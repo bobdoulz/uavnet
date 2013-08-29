@@ -89,7 +89,6 @@ public class UAVBasicPheromoneMovement extends AbstractUAV {
 	    if (intrand == 2){
 		this.updateDestination(right);
 	    }
-	    System.out.println(intrand);
 	    break; // left = right = front
 	}
     }
